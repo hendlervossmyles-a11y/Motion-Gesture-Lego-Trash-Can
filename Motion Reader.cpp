@@ -1,7 +1,11 @@
-const trig_pin = 12;
-const echo_pin = 13;
+#include <Arduino.h>
+
+
+const int trig_pin = 12;
+const int echo_pin = 13;
 float time = 0.0;
 float distance = 0.0;
+float inital_distance = 0.0;
 
 void setup() {
   // put your setup code here, to run once:
@@ -30,10 +34,10 @@ void loop() {
 
     time = pulseIn(echo_pin, HIGH); // read the echo_pin and store the time it was high
     distance = (time * 0.0343) / 2; // calculate distance in cm
-    serial.print("Distance: "+)distance+" cm\n"); // print the distance to the serial monitor
+    Serial.print("Distance: "+)distance+" cm\n"); // print the distance to the serial monitor
 
     if distance < inital_distance/2 {
-        serial.print("Object detected within half the initial distance!\n");
+        Serial.print("Object detected within half the initial distance!\n");
     }
 }
 
