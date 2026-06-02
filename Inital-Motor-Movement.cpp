@@ -7,7 +7,7 @@ int pos = 0;
 
 void setup() {
   // put your setup code here, to run once:
-   myservo.attach(2); //Using Digital Pin 9
+   myservo.attach(2); //Using Digital Pin 2
 }
 
 void loop() {
