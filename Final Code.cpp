@@ -20,7 +20,7 @@ void setup() {
 
   digitalWrite(trig_pin, LOW); // Clear trig_pin
 
-  inital_distance = readInitalDiatance(); // Read the initial distance from the sensor
+  inital_distance = readInitalDistance(); // Read the initial distance from the sensor
 
   Serial.begin(9600);
   
@@ -49,6 +49,7 @@ void loop() {
       Serial.print("Object detected within half the initial distance!\n");
         moveServo(); // Move the servo motor when an object is detected within half the initial distance
         isOpen = true;
+      }
     }
 }
 
