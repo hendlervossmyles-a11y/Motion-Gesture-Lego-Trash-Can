@@ -47,9 +47,9 @@ void loop() {
 
     if (distance < (inital_distance / 2)) {
     if (isOpen == false) { 
-      Serial.println("Object detected! Moving servo...");
+      Serial.println("Movement detected!...");
       moveServo();   // This handles the open, the 3-second pause, and the close
-      isOpen = true; // Mark the door as "used" for this object
+      isOpen = true; // Set Door state to Open
     }
   } 
   // STEP 2: If the distance goes back to normal, reset isOpen to false
@@ -78,13 +78,14 @@ float readInitalDistance() {
 }
 
 void moveServo() {
-    for (pos = 180; pos >= 0; pos -= 1) { // goes from 0 degrees to 180 degrees
-    // in steps of 1 degree
+    for (pos = 180; pos >= 0; pos -= 1) { // goes from 0 degrees to 180 degrees in steps of 1 degree
+    Serial.println("Opening Trash Can...");
     myservo.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15ms for the servo to reach the position
   }
   delay(3000); // Wait for 3 second at the end position
   for  (pos = 0; pos <= 180; pos += 1){ // goes from 180 degrees to 0 degrees
+    Serial.println("Closing Trash Can...");
     myservo.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15ms for the servo to reach the position
   }
