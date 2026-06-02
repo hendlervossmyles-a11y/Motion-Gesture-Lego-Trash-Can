@@ -34,9 +34,11 @@ void loop() {
 
     time = pulseIn(echo_pin, HIGH); // read the echo_pin and store the time it was high
     distance = (time * 0.0343) / 2; // calculate distance in cm
-    Serial.print("Distance: "+)distance+" cm\n"); // print the distance to the serial monitor
+    Serial.print("Distance: "); // print the distance to the serial monitor
+    Serial.print(distance);
+    Serial.println(" cm");
 
-    if distance < inital_distance/2 {
+    if (distance < inital_distance/2) {
         Serial.print("Object detected within half the initial distance!\n");
     }
 }
