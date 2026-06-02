@@ -9,6 +9,7 @@ const int echo_pin = 13;
 float time = 0.0;
 float distance = 0.0;
 float inital_distance = 0.0;
+bool isOpen = false;
 
 void setup() {
   // put your setup code here, to run once:
@@ -44,8 +45,10 @@ void loop() {
     Serial.println(" cm");
 
     if (distance < inital_distance/2) {
-        Serial.print("Object detected within half the initial distance!\n");
+      while (isOpen == false) { 
+      Serial.print("Object detected within half the initial distance!\n");
         moveServo(); // Move the servo motor when an object is detected within half the initial distance
+        isOpen = true;
     }
 }
 
@@ -70,10 +73,12 @@ void moveServo() {
     for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
     // in steps of 1 degree
     myservo.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(3000);                       // waits 15ms for the servo to reach the position
+    delay(15);                       // waits 15ms for the servo to reach the position
   }
+  delay(3000); // Wait for 3 second at the end position
   for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
     myservo.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15ms for the servo to reach the position
   }
+  isOpen = false; // Return true to indicate successful servo movement
 }
