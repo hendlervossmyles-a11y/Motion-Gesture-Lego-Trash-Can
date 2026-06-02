@@ -1,4 +1,4 @@
-# Smart Automated Lid / Door System
+# Motion-Gesture Lego Trash Can
 
 An Arduino-based automation project that utilizes an ultrasonic distance sensor to detect incoming objects and smoothly operate a lid or door using a servo motor. The system uses an optimized software state machine to ensure reactive, single-cycle movements without infinite looping or jitter.
 
