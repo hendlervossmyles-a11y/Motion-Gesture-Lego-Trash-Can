@@ -13,6 +13,7 @@ bool isOpen = false;
 
 void setup() {
   // put your setup code here, to run once:
+  myservo.write(0); // set inital postition
   myservo.attach(2); //Using Digital Pin 2 for the servo motor
 
   pinMode(echo_pin, INPUT);
@@ -44,16 +45,22 @@ void loop() {
     Serial.print(distance);
     Serial.println(" cm");
 
-    if (distance < inital_distance/2) {
-      while (isOpen == false) { 
-      Serial.print("Object detected within half the initial distance!\n");
-        moveServo(); // Move the servo motor when an object is detected within half the initial distance
-        isOpen = true;
-      }
+    if (distance < (inital_distance / 2)) {
+    if (isOpen == false) { 
+      Serial.println("Object detected! Moving servo...");
+      moveServo();   // This handles the open, the 3-second pause, and the close
+      isOpen = true; // Mark the door as "used" for this object
     }
+  } 
+  // STEP 2: If the distance goes back to normal, reset isOpen to false
+  else {
+    isOpen = false; 
+  }
+
+  delay(60); 
 }
 
-float readInitalDiatance() {
+float readInitalDistance() {
   // Function to read the initial distance from the sensor
   digitalWrite(trig_pin, LOW); // clear trig_pin
   
@@ -81,5 +88,4 @@ void moveServo() {
     myservo.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15ms for the servo to reach the position
   }
-  isOpen = false; // Return true to indicate successful servo movement
 }
